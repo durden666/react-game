@@ -2,21 +2,13 @@ import React from 'react'
 import { connect } from "react-redux";
 import { setWhoMoveFirst } from '../redux/gameReducer';
 
-const ChoiseTurn = (props) => {
+const ChoiseTurn = props => {
   return (
-    <div className={'piece-chooser-wrap' + (!props.player ? '' : ' inactive')}>
-      <div className="piece-chooser">
-        <button
-          className="side-o"
-          onClick={ () => props.choosePiece('o') }>
-          O 
-        </button>
+    <div className={'pieceChooserWrap' + (!props.player ? '' : ' inactive')}>
+      <div className="pieceChooser">
+        <button onClick={ () => props.choosePiece('o') }>O</button>
         <span>or</span>
-        <button
-          className="side-x"
-          onClick={ () => props.choosePiece('x') }>
-          X
-        </button>
+        <button onClick={ () => props.choosePiece('x') }>X</button>
       </div>
     </div>    
   );

@@ -1,5 +1,4 @@
 import React from 'react'
-
 const Square = props => {
   let className = ['square'];
   if (props.value !== null) {

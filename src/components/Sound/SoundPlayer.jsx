@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import volumeIcon from '../../assets/img/volume.svg'
 import muteIcon from '../../assets/img/mute.svg'
 
 const SoundPlayer = props => {
   const [flag, setFlag] = useState(false);
-  
+
   return (
     <div>
       <p>Sound volume</p>

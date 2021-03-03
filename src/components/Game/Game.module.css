@@ -1,0 +1,61 @@
+.gameWrapper {
+	max-width: 380px;
+	margin: 0 auto;
+}
+
+.state {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.stateX {
+	padding: 0 1rem;
+}
+
+.winCounter {
+  font-size: 22px;
+}
+
+.infoMove {
+  margin-top: 20px;
+}
+
+.active {
+  background-color: red;
+  transition: all 0.5s ease-in-out;
+	max-width: 280px;
+  margin: 0 auto;
+  border: 0;
+}
+
+.buttonsWrap {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.btn {
+  height: 35px;
+  cursor: pointer;
+  color: #ffffff;
+  outline: none;
+  background: #222222;
+  border: 1px solid white;
+  padding: 0 10px;
+  margin: 0 20px;
+}
+
+.gameWrap {
+  margin: 30px auto 0;
+  border: 5px solid #222525;
+  position: relative;
+  border-color: rgb(213, 220, 226);
+  transition: all 0.5s ease-in-out;
+}
+
+.gameWrap button {
+  border: 0;
+  background: transparent;
+}
+

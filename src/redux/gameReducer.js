@@ -6,7 +6,7 @@ const NEW_GAME = 'NEW_GAME';
 const RESET_GAME = 'RESET_GAME';
 const SET_WHO_MOVE_FIRST = 'SET_WHO_MOVE_FIRST';
 const AI_MOVE = 'AI_MOVE';
-const TOTAL_MOVE = 'TOTAL_MOVE'
+const TOTAL_MOVE = 'TOTAL_MOVE';
 
 let initialState = {
   isGameEnd: false,
@@ -58,7 +58,7 @@ const gameReducer = (state = initialState, action) => {
         squares: Array(9).fill(null),
         isGameEnd: false,
         player: (state.isTurnX && !state.isTurnAI) || (!state.isTurnX && state.isTurnAI) ? 'x' : 'o',
-        totalMove: 0
+        totalMove: 0,
       };
 
     case RESET_GAME:
@@ -71,6 +71,7 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         isTurnX: action.isXMoveFirst,
         isGameEnd: false,
+        isTurnX: false,
         player: (state.isTurnX && !state.isTurnAI) || (!state.isTurnX && state.isTurnAI) ? 'x' : 'o',
       }
 

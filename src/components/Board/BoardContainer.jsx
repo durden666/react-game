@@ -6,10 +6,16 @@ import Square from '../Square';
 import { Board as GameBoard, findBestMove } from "../ai";
 import useSound from 'use-sound';
 import soundUrl from '../../assets/audio/click.mp3'
+import { useHotkeys } from 'react-hotkeys-hook';
+import SoundPlayer from '../Sound/SoundPlayer';
 
 const BoardContainer = props => {
   const [volume, setVolume] = useState(0.5);
   const [play] = useSound(soundUrl, { volume });
+  const [autoPlayOn, setAutoPlayOn] = useState(false)
+
+  useHotkeys('alt+v', () => setVolume(0))
+  useHotkeys('alt+c', () => setVolume(0.5))
 
   const calculateWinner = squares => {
     const lines = [
@@ -43,7 +49,7 @@ const BoardContainer = props => {
   };
 
   const handleClick = (i, ai = false) => {
-    if (props.isGameEnd || props.squares[i] !== null || (!ai && props.isTurnAI)) return;
+    if (props.isGameEnd || props.squares[i] !== null) return;
   
     const squares = props.squares.slice();
     squares[i] = props.isTurnX ? 'x' : 'o';
@@ -67,12 +73,26 @@ const BoardContainer = props => {
       : findBestMove(new GameBoard(props.squares, props.isTurnX
         ? 'x': 'o')
       );
-
-      setTimeout(() => { handleClick(move, true) }, 100);
+        
+      handleClick(move, true)
       props.setAITurn(false);
     };
-  });
+  })
 
+  useEffect(() => {
+    if (!props.isGameEnd) {
+      const move = props.squares.filter(s => s).length === 0
+      ? Math.floor(Math.random() * 8)
+      : findBestMove(new GameBoard(props.squares, props.isTurnX
+        ? 'x': 'o')
+      );
+
+      handleClick(move, true)
+      props.setAITurn(false);
+    };
+  }, [autoPlayOn])
+
+    
   const renderSquare = (i) => {
     return (
       <Square
@@ -83,12 +103,14 @@ const BoardContainer = props => {
   }
 
   return (
-    <Board
-      { ...props }
-      renderSquare = { renderSquare }
-      soundClickMinus = { soundClickMinus }
-      soundClickPlus = { soundClickPlus }
-    />
+    <>
+      <button onClick={() => setAutoPlayOn(!autoPlayOn)}>Autoplay</button>
+      <Board {...props} renderSquare = {renderSquare} />
+      <SoundPlayer
+        soundClickMinus = {soundClickMinus}
+        soundClickPlus = {soundClickPlus}
+      />
+    </>
   )
 }
 

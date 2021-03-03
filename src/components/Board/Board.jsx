@@ -1,9 +1,7 @@
 import React from "react";
-import SoundPlayer from "../Sound/SoundPlayer";
 
 const Board = props => {
   return (
-    <>
     <div className="board-wrap">
       <div className="board-row">
         {props.renderSquare(0)}
@@ -21,32 +19,7 @@ const Board = props => {
         {props.renderSquare(8)}
       </div>
     </div>
-    <SoundPlayer
-      soundClickMinus = {props.soundClickMinus}
-      soundClickPlus = {props.soundClickPlus}
-    />
-  </>
   );
 }
-
- {/* <p>Sound volume</p>
-    <div className="btn-sound-wrapper">
-      <button className="btn-sound" onClick={ ()=>setFlag(!flag) }>  
-        {flag
-          ? <img src={volumeIcon} />
-          : <img src={muteIcon} />} 
-      </button>
-      <button
-        className="btn-sound"
-        onClick={() => props.soundClickPlus()}>
-        +
-      </button>
-      <button
-        className="btn-sound"
-        onClick={() => props.soundClickMinus()}>
-        -
-      </button>
-    </div>
-  </div> */}
 
 export default Board

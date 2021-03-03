@@ -56,7 +56,7 @@ const minimax = (board, maximizing, originalPlayer) => {
     var bestEval = Number.MIN_SAFE_INTEGER;
 
     for (let move of board.legalMoves()) {
-      const result = minimax(board.move(move), false, originalPlayer);
+      const result = minimax(board.move(move), true, originalPlayer);
       bestEval = Math.max(result, bestEval);
     }
 
