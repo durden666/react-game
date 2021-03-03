@@ -50,10 +50,10 @@ const BoardContainer = props => {
 
   const handleClick = (i, ai = false) => {
     if (props.isGameEnd || props.squares[i] !== null) return;
-  
+
     const squares = props.squares.slice();
     squares[i] = props.isTurnX ? 'x' : 'o';
-    
+
     props.makeMove(squares);
     props.totalMove()
     play()   
@@ -66,6 +66,7 @@ const BoardContainer = props => {
     }
   }
 
+
   useEffect(() => {
     if (!props.isGameEnd && props.isTurnAI) {
       const move = props.squares.filter(s => s).length === 0
@@ -73,13 +74,14 @@ const BoardContainer = props => {
       : findBestMove(new GameBoard(props.squares, props.isTurnX
         ? 'x': 'o')
       );
-        
-      handleClick(move, true)
+
+      setTimeout(() => { handleClick(move, true) }, 100);
       props.setAITurn(false);
     };
-  })
+  });
 
-  useEffect(() => {
+
+  const aiMove = () => {
     if (!props.isGameEnd) {
       const move = props.squares.filter(s => s).length === 0
       ? Math.floor(Math.random() * 8)
@@ -90,8 +92,8 @@ const BoardContainer = props => {
       handleClick(move, true)
       props.setAITurn(false);
     };
-  }, [autoPlayOn])
-
+  }
+   
     
   const renderSquare = (i) => {
     return (
@@ -104,7 +106,7 @@ const BoardContainer = props => {
 
   return (
     <>
-      <button onClick={() => setAutoPlayOn(!autoPlayOn)}>Autoplay</button>
+      <button onClick={aiMove}>Autoplay</button>
       <Board {...props} renderSquare = {renderSquare} />
       <SoundPlayer
         soundClickMinus = {soundClickMinus}
